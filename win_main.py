@@ -291,7 +291,8 @@ class MainWin:
 
                 def changeWinTopIS():  # 改变窗口置顶【标志】事件
                     Config.set('WindowTopMode',  # 改变窗口置顶模式
-                               WindowTopModeFlag.eternity if Config.get('isWindowTop') else WindowTopModeFlag.finish)
+                               WindowTopModeFlag.eternity if Config.get('isWindowTop') 
+                               else WindowTopModeFlag.finish)
                     self.gotoTop()
                     if Config.get('isWindowTop'):  # 切换到置顶
                         tipsLab.pack(side='top')
