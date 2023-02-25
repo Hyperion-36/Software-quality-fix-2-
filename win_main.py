@@ -965,9 +965,9 @@ class MainWin:
             # 加入待处理列表
             name = os.path.basename(path)  # 带后缀的文件名
             tableInfo = (name, "", "")
-            id = self.table.insert('', 'end', values=tableInfo)  # 添加到表格组件中
+            Id = self.table.insert('', 'end', values=tableInfo)  # 添加到表格组件中
             dictInfo = {"name": name, "path": path, "size": s}
-            self.batList.append(id, dictInfo)
+            self.batList.append(Id, dictInfo)
 
         isRecursiveSearch = Config.get("isRecursiveSearch")
         for path in paths:  # 遍历拖入的所有路径
