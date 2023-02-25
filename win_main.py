@@ -1,7 +1,4 @@
-from utils.config import Config
-from utils.config import Umi
-from utils.config import ScsModeFlag
-from utils.config import WindowTopModeFlag  # 最先加载配置
+from utils.config import Config, Umi, ScsModeFlag, WindowTopModeFlag  # 最先加载配置
 from utils.logger import GetLog
 from utils.asset import Asset  # 资源
 from utils.asset import GetTbpuHelp
