@@ -291,7 +291,7 @@ class MainWin:
 
                 def changeWinTopIS():  # 改变窗口置顶【标志】事件
                     Config.set('WindowTopMode',  # 改变窗口置顶模式
-                               WindowTopModeFlag.eternity if Config.get('isWindowTop') 
+                               WindowTopModeFlag.eternity if Config.get('isWindowTop')
                                else WindowTopModeFlag.finish)
                     self.gotoTop()
                     if Config.get('isWindowTop'):  # 切换到置顶
@@ -329,7 +329,8 @@ class MainWin:
                             fontFamiliesABC.append(i)
                 fontFamilies += fontFamiliesABC
                 cbox = ttk.Combobox(fr3, state='readonly', takefocus=0,
-                                    textvariable=Config.getTK('textpanelFontFamily'), value=fontFamilies)
+                                    textvariable=Config.getTK('textpanelFontFamily'),
+                                    value=fontFamilies)
                 cbox.grid(column=1, row=0, sticky='ew')
                 self.balloon.bind(cbox, '不要使用滚轮。\n请用上下方向键或拉动滚动条来浏览列表')
                 tk.Label(fr3, text='字号').grid(column=2, row=0, sticky='w')
@@ -337,7 +338,9 @@ class MainWin:
                          width=4, takefocus=0).grid(column=3, row=0, sticky='w')
                 tk.Label(fr3, text=' ').grid(column=4, row=0, sticky='w')
                 ttk.Checkbutton(fr3, text='加粗',
-                                variable=Config.getTK('isTextpanelFontBold')).grid(column=5, row=0, sticky='w')
+                                variable=Config.getTK(
+                                    'isTextpanelFontBold')
+                                ).grid(column=5, row=0, sticky='w')
                 # 检查当前配置字体是否存在
                 f = Config.get('textpanelFontFamily')
                 if f and f not in fontFamilies:
@@ -374,24 +377,28 @@ class MainWin:
                 ttk.Radiobutton(fr2, text='最小化到托盘',
                                 variable=Config.getTK('isBackground'), value=True).pack(side='left')
                 ttk.Radiobutton(fr2, text='退出软件',
-                                variable=Config.getTK('isBackground'), value=False).pack(side='left', padx=15)
+                                variable=Config.getTK('isBackground'),
+                                value=False).pack(side='left', padx=15)
 
                 # 弹出方式设置
                 fr3 = tk.Frame(fSoft)
                 fr3.pack(side='top', fill='x', pady=2, padx=5)
                 tk.Label(fr3, text='窗口置顶：').pack(side='left', padx=2)
                 wid = ttk.Radiobutton(fr3, text='自动弹出',
-                                      variable=Config.getTK('WindowTopMode'), value=WindowTopModeFlag.finish)
+                                      variable=Config.getTK('WindowTopMode'),
+                                      value=WindowTopModeFlag.finish)
                 wid.pack(side='left')
                 self.balloon.bind(
                     wid, '当主窗口处于后台，\n唤起快捷识图、或批量任务完成时弹出')
                 wid = ttk.Radiobutton(fr3, text='始终置顶',
-                                      variable=Config.getTK('WindowTopMode'), value=WindowTopModeFlag.eternity)
+                                      variable=Config.getTK('WindowTopMode'),
+                                      value=WindowTopModeFlag.eternity)
                 wid.pack(side='left', padx=5)
                 self.balloon.bind(
                     wid, '窗口锁定于系统顶层\n\n启用后，软件内的鼠标悬停提示框会被隐藏')
                 wid = ttk.Radiobutton(fr3, text='不要弹出',
-                                      variable=Config.getTK('WindowTopMode'), value=WindowTopModeFlag.never)
+                                      variable=Config.getTK('WindowTopMode'),
+                                      value=WindowTopModeFlag.never)
                 wid.pack(side='left')
                 self.balloon.bind(
                     wid, '不会主动弹出窗口')
@@ -402,11 +409,14 @@ class MainWin:
                 self.balloon.bind(
                     fr4, '可设置静默启动，收纳到系统托盘，不显示主窗口')
                 ttk.Checkbutton(fr4, variable=Config.getTK('isAutoStartup'),
-                                text='开机自启', command=Startup.switchAutoStartup).pack(side='left')
+                                text='开机自启', command=Startup.switchAutoStartup
+                                ).pack(side='left')
                 ttk.Checkbutton(fr4, variable=Config.getTK('isStartMenu'),
-                                text='开始菜单项', command=Startup.switchStartMenu).pack(side='left', padx=20)
+                                text='开始菜单项', command=Startup.switchStartMenu
+                                ).pack(side='left', padx=20)
                 ttk.Checkbutton(fr4, variable=Config.getTK('isDesktop'),
-                                text='桌面快捷方式', command=Startup.switchDesktop).pack(side='left')
+                                text='桌面快捷方式', command=Startup.switchDesktop
+                                ).pack(side='left')
 
             initSoftwareFrame()
 
@@ -461,7 +471,8 @@ class MainWin:
                 syssscom = 'win+shift+s'
                 fhkSys = Widget.hotkeyFrame(frss, '系统截图 ', 'Screenshot',
                                             lambda *e: self.win.event_generate(
-                                                '<<ScreenshotEvent>>'), True, syssscom, isAutoBind=False)
+                                                '<<ScreenshotEvent>>'),
+                                            True, syssscom, isAutoBind=False)
                 self.balloon.bind(
                     fhkSys,
                     '监听到系统截图后调用OCR\n\n若截图后软件没有反应，请确保windows系统自带的\n【截图和草图】中【自动复制到剪贴板】开关处于打开状态')
@@ -478,12 +489,15 @@ class MainWin:
                     fr11.pack(side='left')
                     self.balloon.bind(
                         fr11,
-                        '宽松：当前按下的按键只要包含设定的组合键，就能触发\n严格：当前按下的按键必须与设定的组合一致，才能触发')
+                        '宽松：当前按下的按键只要包含设定的组合键，就能触发\n'
+                        '严格：当前按下的按键必须与设定的组合一致，才能触发')
                     tk.Label(fr11, text='触发判定').pack(side='left')
                     ttk.Radiobutton(fr11, text='宽松',
-                                    variable=Config.getTK('isHotkeyStrict'), value=False).pack(side='left')
+                                    variable=Config.getTK('isHotkeyStrict'),
+                                    value=False).pack(side='left')
                     ttk.Radiobutton(fr11, text='严格',
-                                    variable=Config.getTK('isHotkeyStrict'), value=True).pack(side='left')
+                                    variable=Config.getTK('isHotkeyStrict'),
+                                    value=True).pack(side='left')
                     fr12 = tk.Frame(fr1)
                     fr12.pack(side='left')
                     self.balloon.bind(fr12, '必须在该时间之内\n连续按下组合中的所有按键，才能触发')
@@ -533,7 +547,8 @@ class MainWin:
                             Widget.delHotkey(syssscom)  # 注销按键
                             if umihk:
                                 Hotkey.add(umihk,  # 添加快捷键监听
-                                           lambda *e: self.win.event_generate('<<ScreenshotEvent>>'))
+                                           lambda *e: self.win.event_generate
+                                           ('<<ScreenshotEvent>>'))
                     Log.info(f'截图模式改变：{scsMode}')
 
                 Config.addTrace('scsModeName', onModeChange)
@@ -557,7 +572,8 @@ class MainWin:
                 ttk.Checkbutton(fr1, text="完成后打开文件",
                                 variable=Config.getTK('isOpenOutputFile')).pack(side='left')
                 ttk.Checkbutton(fr1, text="完成后打开目录",
-                                variable=Config.getTK('isOpenExplorer'), ).pack(side='left', padx=15)
+                                variable=Config.getTK('isOpenExplorer'),
+                                ).pack(side='left', padx=15)
 
                 fr2 = tk.Frame(frameScheduler)
                 fr2.pack(side='top', fill='x', pady=2, padx=5)
@@ -565,7 +581,8 @@ class MainWin:
                                 variable=Config.getTK('isOkMission')).pack(side='left')
                 okMissionDict = Config.get("okMission")
                 okMissionNameList = list(okMissionDict.keys())
-                wid = ttk.Combobox(fr2, width=14, state="readonly", textvariable=Config.getTK('okMissionName'),
+                wid = ttk.Combobox(fr2, width=14, state="readonly",
+                                   textvariable=Config.getTK('okMissionName'),
                                    value=okMissionNameList)
                 wid.pack(side='left')
                 self.balloon.bind(wid, '可打开软件配置json文件，添加自己的任务（cmd命令）')
@@ -733,13 +750,17 @@ class MainWin:
                 wid.pack(side='top', fill='x', pady=2, padx=5)
                 self.balloon.bind(
                     wid,
-                    '本软件有整理好的多国语言扩展包，可导入更多语言模型库，\n也可以手动导入PaddleOCR兼容的模型库，\n详情请浏览项目Github主页\n\n竖排模型库（识别语言）建议与竖排合并段落搭配使用')
+                    '本软件有整理好的多国语言扩展包，可导入更多语言模型库，'
+                    '\n也可以手动导入PaddleOCR兼容的模型库，'
+                    '\n详情请浏览项目Github主页\n\n竖排模型库（识别语言）建议与竖排合并段落搭配使用')
                 # 压缩
                 fLim = tk.Frame(frameOCR)
                 fLim.pack(side='top', fill='x', pady=2, padx=5)
                 self.balloon.bind(
                     fLim,
-                    '长边压缩模式可以大幅加快识别速度，但可能降低大分辨率图片的识别准确率\n大于4000像素的图片，可将数值改为最大边长的一半。必须为大于零的整数\n默认值： 960\n\n短边扩大模式可能提高小分辨率图片的准确度。一般用不着')
+                    '长边压缩模式可以大幅加快识别速度，但可能降低大分辨率图片的识别准确率'
+                    '\n大于4000像素的图片，可将数值改为最大边长的一半。必须为大于零的整数\n默认值： '
+                    '960\n\n短边扩大模式可能提高小分辨率图片的准确度。一般用不着')
                 Widget.comboboxFrame(
                     fLim, '缩放预处理：', 'ocrLimitMode', self.lockWidget, 14).pack(side='left')
                 tk.Label(fLim, text='至').pack(side='left')
@@ -939,9 +960,13 @@ class MainWin:
             title='选择图片', filetypes=[('图片', suf)])
         self.addImagesList(paths)
 
-    def addImagesList(self, paths):  # 添加一批图片列表
+    def addImagesList(self, paths):
+        """
+        添加一批图片列表
+        Добавить пакет изображений в список.
+        :param paths: Путь к файлу
+        """
         suf = Config.get('imageSuffix').split()  # 许可后缀列表
-
         def addImage(path):  # 添加一张图片。传入路径，许可后缀。
             path = path.replace("/", "\\")  # 浏览是左斜杠，拖入是右斜杠；需要统一
             if suf and os.path.splitext(path)[1].lower() not in suf:
@@ -1012,8 +1037,8 @@ class MainWin:
         tran = 2  # 绘制偏移量
         for i in range(3):  # 绘制新图
             for a in area['area'][i]:
-                x0, y0 = a[0][0] * scale + tran, a[0][1] * scale + tran,
-                x1, y1 = a[1][0] * scale + tran, a[1][1] * scale + tran,
+                x0, y0 = a[0][0] * scale + tran, a[0][1] * scale + tran
+                x1, y1 = a[1][0] * scale + tran, a[1][1] * scale + tran
                 self.canvas.create_rectangle(
                     x0, y0, x1, y1, fill=areaColor[i])
         self.ignoreBtn.pack_forget()  # 隐藏按钮
