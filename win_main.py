@@ -1503,7 +1503,7 @@ class MainWin:
         SysTray.stop()  # 关闭托盘。这个函数里有判断，不会造成无限递归。
         # 等待一段时间，保证托盘线程关闭，图标从系统注销
         # 然后强制终止主进程，防止引擎子线程苟且偷生
-        self.win.after(100, lambda: os._exit(0))
+        self.win.after(100)
 
     def showTips(self, tipsText):
         """
