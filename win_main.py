@@ -968,7 +968,7 @@ class MainWin:
                     fEX, text='打开设置文件', fg='gray', cursor='hand2')
                 labelOpenFile.pack(side='left')
                 labelOpenFile.bind(
-                    '<Button-1>', lambda *e: os.system('Umi-OCR_config.json'))
+                    '<Button-1>', lambda *e: os.startfile('Umi-OCR_config.json'))
                 self.balloon.bind(labelOpenFile, 'Umi-OCR_config.json')
                 wid = tk.Checkbutton(fEX, text='调试模式', fg='gray',
                                      variable=Config.getTK('isDebug'))
