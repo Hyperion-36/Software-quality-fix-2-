@@ -1,3 +1,6 @@
+"""
+mian part
+"""
 from utils.config import Config, Umi, ScsModeFlag, WindowTopModeFlag  # 最先加载配置
 from utils.logger import GetLog
 from utils.asset import Asset  # 资源
