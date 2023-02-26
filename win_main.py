@@ -31,7 +31,13 @@ Log = GetLog()
 
 
 class MainWin:
+    """
+
+    """
     def __init__(self):
+        """
+
+        """
         self.batList = KeyList()  # 管理批量图片的信息及表格id的列表
         self.tableKeyList = []  # 顺序存放self.imgDict
         self.lockWidget = []
@@ -56,7 +62,11 @@ class MainWin:
         self.win.withdraw()  # 隐藏窗口，等初始化完毕再考虑是否显示
         self.balloon = Balloon(self.win)  # 气泡框
 
-        def initStyle():  # 初始化样式
+        def initStyle():
+            """
+
+            """
+            # 初始化样式
             style = ttk.Style()
             # winnative clam alt default classic vista xpnative
             # style.theme_use('default')
@@ -68,6 +78,9 @@ class MainWin:
         initStyle()
 
         def initWin():
+            """
+
+            """
             self.win.title(Umi.name)
             # 窗口大小与位置
             w, h = 360, 500  # 窗口初始大小与最小大小
@@ -91,7 +104,11 @@ class MainWin:
         Config.checkMultiOpen()  # 检查多开
 
         # 3.初始化组件
-        def initTop():  # 顶部按钮
+        def initTop():
+            """
+
+            """
+            # 顶部按钮
             tk.Frame(self.win, height=5).pack(side='top')
             fr = tk.Frame(self.win)
             fr.pack(side='top', fill="x", padx=5)
@@ -121,7 +138,11 @@ class MainWin:
         self.notebook.pack(expand=True, fill=tk.BOTH)  # 填满父组件
         self.notebookTab = []
 
-        def initTab1():  # 表格卡
+        def initTab1():
+            """
+
+            """
+            # 表格卡
             tabFrameTable = tk.Frame(self.notebook)  # 选项卡主容器
             self.notebookTab.append(tabFrameTable)
             self.notebook.add(tabFrameTable, text=f'{"批量处理": ^10s}')
@@ -191,7 +212,11 @@ class MainWin:
 
         initTab1()
 
-        def initTab2():  # 输出卡
+        def initTab2():
+            """
+
+            """
+            # 输出卡
             tabFrameOutput = tk.Frame(self.notebook)  # 选项卡主容器
             self.notebookTab.append(tabFrameOutput)
             self.notebook.add(tabFrameOutput, text=f'{"识别内容": ^10s}')
@@ -248,12 +273,20 @@ class MainWin:
 
         initTab2()
 
-        def initTab3():  # 设置卡
+        def initTab3():
+            """
+
+            """
+            # 设置卡
             tabFrameConfig = tk.Frame(self.notebook)  # 选项卡主容器
             self.notebookTab.append(tabFrameConfig)
             self.notebook.add(tabFrameConfig, text=f'{"设置": ^10s}')
 
-            def initOptFrame():  # 初始化可滚动画布 及 内嵌框架
+            def initOptFrame():
+                """
+
+                """
+                # 初始化可滚动画布 及 内嵌框架
                 optVbar = tk.Scrollbar(
                     tabFrameConfig, orient="vertical")  # 创建滚动条
                 optVbar.pack(side="right", fill="y")
@@ -272,7 +305,11 @@ class MainWin:
 
             LabelFramePadY = 3  # 每个区域上下间距
 
-            def initTopTips():  # 顶部提示
+            def initTopTips():
+                """
+
+                """
+                # 顶部提示
                 fTips = tk.Frame(self.optFrame)
                 fTips.pack(side='top')
                 tipsLab = tk.Label(
@@ -282,14 +319,22 @@ class MainWin:
                     tipsLab.pack(side='top')
                 tk.Frame(fTips).pack(side='top')  # 空框架，用于自动调整高度的占位
 
-                def changeWinTopMode():  # 改变窗口置顶【模式】事件
+                def changeWinTopMode():
+                    """
+
+                    """
+                    # 改变窗口置顶【模式】事件
                     Config.set('isWindowTop',
                                Config.get('WindowTopMode') == WindowTopModeFlag.eternity)
 
                 Config.addTrace('WindowTopMode', changeWinTopMode)
                 changeWinTopMode()  # 初始化
 
-                def changeWinTopIS():  # 改变窗口置顶【标志】事件
+                def changeWinTopIS():
+                    """
+
+                    """
+                    # 改变窗口置顶【标志】事件
                     Config.set('WindowTopMode',  # 改变窗口置顶模式
                                WindowTopModeFlag.eternity if Config.get('isWindowTop')
                                else WindowTopModeFlag.finish)
@@ -306,7 +351,11 @@ class MainWin:
 
             initTopTips()
 
-            def initSoftwareFrame():  # 软件行为设置
+            def initSoftwareFrame():
+                """
+
+                """
+                # 软件行为设置
                 fSoft = tk.LabelFrame(
                     self.optFrame, text='通用设置')
                 fSoft.pack(side='top', fill='x',
@@ -348,6 +397,9 @@ class MainWin:
                     Config.set('textpanelFontFamily', '')
 
                 def updateTextpanel():
+                    """
+
+                    """
                     f = Config.get('textpanelFontFamily')
                     s = Config.get('textpanelFontSize')
                     b = Config.get('isTextpanelFontBold')
@@ -420,7 +472,11 @@ class MainWin:
 
             initSoftwareFrame()
 
-            def quickOCR():  # 快捷识图设置
+            def quickOCR():
+                """
+
+                """
+                # 快捷识图设置
                 fQuick = tk.LabelFrame(
                     self.optFrame, text='快捷识图')
                 fQuick.pack(side='top', fill='x',
@@ -443,6 +499,9 @@ class MainWin:
                 self.balloon.bind(fhkU0, '修改截图时指示器的颜色\n该项目修改后，下次打开软件生效')
 
                 def changeColor(configName, title=None):
+                    """
+
+                    """
                     initColor = Config.get(configName)
                     color = tk.colorchooser.askcolor(
                         color=initColor, title=title)
@@ -525,6 +584,9 @@ class MainWin:
 
                 # 切换截图模式
                 def onModeChange():
+                    """
+
+                    """
                     isHotkey = Config.get('isHotkeyScreenshot')
                     scsName = Config.get('scsModeName')
                     umihk = Config.get('hotkeyScreenshot')
@@ -561,7 +623,11 @@ class MainWin:
             frameBatch.pack(side='top', fill='x',
                             ipady=2, pady=LabelFramePadY, padx=4)
 
-            def initScheduler():  # 计划任务设置
+            def initScheduler():
+                """
+
+                """
+                # 计划任务设置
                 frameScheduler = tk.LabelFrame(
                     frameBatch, labelanchor='n', text="计划任务")
                 frameScheduler.pack(side='top', fill='x',
@@ -591,7 +657,11 @@ class MainWin:
 
             initScheduler()
 
-            def initInFile():  # 输入设置
+            def initInFile():
+                """
+
+                """
+                # 输入设置
                 fInput = tk.LabelFrame(
                     frameBatch, labelanchor='n', text='图片导入')
                 fInput.pack(side='top', fill='x',
@@ -617,7 +687,11 @@ class MainWin:
 
             initInFile()
 
-            def initOutFile():  # 输出设置
+            def initOutFile():
+                """
+
+                """
+                # 输出设置
                 fOutput = tk.LabelFrame(
                     frameBatch, labelanchor='n', text="结果输出")
                 fOutput.pack(side='top', fill='x',
@@ -648,7 +722,11 @@ class MainWin:
                 self.lockWidget.append(wid)
                 tk.Label(fr1, text=' ').grid(column=1, row=0)
 
-                def offAllOutput():  # 关闭全部输出
+                def offAllOutput():
+                    """
+
+                    """
+                    # 关闭全部输出
                     if OCRe.msnFlag == MsnFlag.none:
                         Config.set('isOutputTxt', False)
                         Config.set('isOutputSeparateTxt', False)
@@ -687,7 +765,11 @@ class MainWin:
             initOutFile()
 
             # 后处理设置
-            def initProcess():  # 后处理设置
+            def initProcess():
+                """
+
+                """
+                # 后处理设置
                 fProcess = tk.LabelFrame(self.optFrame, text='文本后处理')
                 fProcess.pack(side='top', fill='x',
                               ipady=2, pady=LabelFramePadY, padx=4)
@@ -740,7 +822,11 @@ class MainWin:
 
             initProcess()
 
-            def initOcrUI():  # OCR引擎设置
+            def initOcrUI():
+                """
+
+                """
+                # OCR引擎设置
                 frameOCR = tk.LabelFrame(
                     self.optFrame, text="OCR识别引擎设置")
                 frameOCR.pack(side='top', fill='x', ipady=2,
@@ -825,6 +911,9 @@ class MainWin:
                 labStart.pack(side='right', padx=5)
 
                 def engStart():
+                    """
+
+                    """
                     try:
                         OCRe.start()
                     except ValueError as exc:
@@ -843,7 +932,11 @@ class MainWin:
 
             initOcrUI()
 
-            def initAbout():  # 关于面板
+            def initAbout():
+                """
+
+                """
+                # 关于面板
                 frameAbout = tk.LabelFrame(
                     self.optFrame, text='关于')
                 frameAbout.pack(side='top', fill='x', ipady=2,
@@ -860,7 +953,11 @@ class MainWin:
 
             initAbout()
 
-            def initEX():  # 额外
+            def initEX():
+                """
+
+                """
+                # 额外
                 fEX = tk.Frame(self.optFrame)
                 fEX.pack(side='top', fill='x', padx=4)
                 labelOpenFile = tk.Label(
@@ -886,11 +983,19 @@ class MainWin:
 
             initEX()
 
-            def initOptFrameWH():  # 初始化框架的宽高
+            def initOptFrameWH():
+                """
+
+                """
+                # 初始化框架的宽高
                 self.updateFrameHeight()
                 self.optCanvasWidth = 1  # 宽度则是随窗口大小而改变。
 
-                def onCanvasResize(event):  # 绑定画布大小改变事件
+                def onCanvasResize(event):
+                    """
+
+                    """
+                    # 绑定画布大小改变事件
                     cW = event.width - 3  # 当前 画布宽度
                     if not cW == self.optCanvasWidth:  # 若与上次不同：
                         self.optFrame['width'] = cW  # 修改设置页 框架宽度
@@ -899,7 +1004,11 @@ class MainWin:
                 self.optCanvas.bind(  # 绑定画布大小改变事件。只有画布组件前台显示时才会触发，减少性能占用
                     '<Configure>', onCanvasResize)
 
-                def onCanvasMouseWheel(event):  # 绑定画布中滚轮滚动事件
+                def onCanvasMouseWheel(event):
+                    """
+
+                    """
+                    # 绑定画布中滚轮滚动事件
                     self.optCanvas.yview_scroll(
                         1 if event.delta < 0 else -1, "units")
 
@@ -913,6 +1022,9 @@ class MainWin:
 
         # 解析启动参数
         def getArgs():
+            """
+
+            """
             try:
                 parser = ArgumentParser()
                 parser.add_argument('--no_win', dest='isNoWin', type=bool)
@@ -922,6 +1034,9 @@ class MainWin:
                     '遇到了一点小问题', f'程序启动参数解析失败。已切换为默认参数。\n{err}')
 
                 class aaa:
+                    """
+
+                    """
                     isNoWin = False
 
                 return aaa()
@@ -940,7 +1055,11 @@ class MainWin:
 
     # 加载图片 ===============================================
 
-    def draggedImages(self, paths):  # 拖入图片
+    def draggedImages(self, paths):
+        """
+
+        """
+        # 拖入图片
         if not OCRe.msnFlag == MsnFlag.none:
             tk.messagebox.showwarning(
                 '任务进行中', '请停止任务后，再拖入图片')
@@ -952,7 +1071,11 @@ class MainWin:
                                      errors='ignore'))
         self.addImagesList(pathList)
 
-    def openFileWin(self):  # 打开选择文件窗
+    def openFileWin(self):
+        """
+
+        """
+        # 打开选择文件窗
         if not OCRe.msnFlag == MsnFlag.none:
             return
         suf = Config.get('imageSuffix')  # 许可后缀
@@ -1011,7 +1134,11 @@ class MainWin:
 
     # 忽略区域 ===============================================
 
-    def openSelectArea(self):  # 打开选择区域
+    def openSelectArea(self):
+        """
+
+        """
+        # 打开选择区域
         if not OCRe.msnFlag == MsnFlag.none or not self.win.attributes('-disabled') == 0:
             return
         defaultPath = ""
@@ -1020,7 +1147,11 @@ class MainWin:
         self.win.attributes("-disabled", 1)  # 禁用父窗口
         IgnoreAreaWin(self.closeSelectArea, defaultPath)
 
-    def closeSelectArea(self):  # 关闭选择区域，获取选择区域数据
+    def closeSelectArea(self):
+        """
+
+        """
+        # 关闭选择区域，获取选择区域数据
         self.win.attributes("-disabled", 0)  # 启用父窗口
         area = Config.get("ignoreArea")
         if not area:
@@ -1045,7 +1176,11 @@ class MainWin:
         self.ignoreFrame.pack(side='top', fill='x')  # 显示忽略区域窗口
         self.updateFrameHeight()  # 刷新框架
 
-    def clearArea(self):  # 清空忽略区域
+    def clearArea(self):
+        """
+
+        """
+        # 清空忽略区域
         self.ignoreFrame.pack_forget()  # 隐藏忽略区域窗口
         self.ignoreBtn.pack(side='top', fill='x')  # 显示按钮
         self.updateFrameHeight()  # 刷新框架
@@ -1055,7 +1190,11 @@ class MainWin:
 
     # 表格操作 ===============================================
 
-    def clearTable(self):  # 清空表格
+    def clearTable(self):
+        """
+
+        """
+        # 清空表格
         if not OCRe.msnFlag == MsnFlag.none:
             return
         self.progressbar["value"] = 0
@@ -1068,7 +1207,11 @@ class MainWin:
         for i in chi:
             self.table.delete(i)  # 表格组件移除
 
-    def delImgList(self):  # 图片列表中删除选中
+    def delImgList(self):
+        """
+
+        """
+        # 图片列表中删除选中
         if not OCRe.msnFlag == MsnFlag.none:
             return
         chi = self.table.selection()
@@ -1076,13 +1219,21 @@ class MainWin:
             self.table.delete(i)
             self.batList.delete(key=i)
 
-    def setTableItem(self, time, score, key=None, index=-1):  # 改变表中第index项的数据信息
+    def setTableItem(self, time, score, key=None, index=-1):
+        """
+
+        """
+        # 改变表中第index项的数据信息
         if not key:
             key = self.batList.indexToKey(index)
         self.table.set(key, column='time', value=time)
         self.table.set(key, column='score', value=score)
 
-    def clearTableItem(self):  # 清空表格数据信息
+    def clearTableItem(self):
+        """
+
+        """
+        # 清空表格数据信息
         keys = self.batList.getKeys()
         for key in keys:  # 清空表格参数
             self.table.set(key, column='time', value="")
@@ -1105,7 +1256,11 @@ class MainWin:
 
     # 窗口操作 =============================================
 
-    def updateFrameHeight(self):  # 刷新设置页框架高度
+    def updateFrameHeight(self):
+        """
+
+        """
+        # 刷新设置页框架高度
         self.optFrame.pack_propagate(True)  # 启用框架自动宽高调整
         self.optFrame.update()  # 强制刷新
         rH = self.optFrame.winfo_height()  # 由组件撑起的 框架高度
@@ -1113,7 +1268,11 @@ class MainWin:
         self.optFrame.pack_propagate(False)  # 禁用框架自动宽高调整
         self.optFrame["height"] = rH  # 手动还原高度
 
-    def gotoTop(self, isForce=False):  # 主窗置顶
+    def gotoTop(self, isForce=False):
+        """
+
+        """
+        # 主窗置顶
         flag = Config.get('WindowTopMode')
         if flag == WindowTopModeFlag.never and not isForce:  # 模式：从不置顶
             self.win.attributes('-topmost', 0)
@@ -1131,15 +1290,25 @@ class MainWin:
 
     # 进行任务 ===============================================
 
-    def setRunning(self, batFlag):  # 设置运行状态。
+    def setRunning(self, batFlag):
+        """
+
+        """
+        # 设置运行状态。
 
         def setNone():
+            """
+
+            """
             self.btnRun['text'] = '开始任务'
             self.btnRun['state'] = 'normal'
             Config.set('tipsTop2', '已结束')
             return 'normal'
 
         def initing():
+            """
+
+            """
             self.btnRun['text'] = '停止任务'
             self.btnRun['state'] = 'normal'
             Config.set('tipsTop1', '')
@@ -1150,11 +1319,17 @@ class MainWin:
             return 'disable'
 
         def running():
+            """
+
+            """
             self.progressbar.stop()  # 进度条停止加载动画
             self.progressbar['mode'] = 'determinate'  # 进度条静止模式
             return ''
 
         def stopping():
+            """
+
+            """
             self.btnRun['text'] = '正在停止'
             self.btnRun['state'] = 'disable'
             if str(self.progressbar["mode"]) == 'indeterminate':
@@ -1179,7 +1354,11 @@ class MainWin:
                     w['state'] = state
         self.win.update()
 
-    def run(self):  # 运行按钮触发
+    def run(self):
+        """
+
+        """
+        # 运行按钮触发
         if OCRe.msnFlag == MsnFlag.none:  # 未在运行
             if self.batList.isEmpty():
                 return
@@ -1196,7 +1375,11 @@ class MainWin:
         elif OCRe.msnFlag in [MsnFlag.running, MsnFlag.initing]:
             OCRe.stopByMode()
 
-    def startSingleClipboard(self):  # 开始单张识别的剪贴板任务
+    def startSingleClipboard(self):
+        """
+
+        """
+        # 开始单张识别的剪贴板任务
         try:  # 初始化快捷识图任务处理器
             msnQui = MsnQuick()
         except ValueError as err:
@@ -1207,7 +1390,11 @@ class MainWin:
         self.notebook.select(self.notebookTab[1])  # 转到输出卡
         self.gotoTop()  # 主窗置顶
 
-    def runClipboard(self):  # 识别剪贴板
+    def runClipboard(self):
+        """
+
+        """
+        # 识别剪贴板
         if not OCRe.msnFlag == MsnFlag.none:  # 正在运行，不执行
             return
         clipData = Tool.getClipboardFormat()  # 读取剪贴板
@@ -1245,7 +1432,11 @@ class MainWin:
             self.gotoTop()  # 主窗置顶
             self.notebook.select(self.notebookTab[1])  # 转到输出卡
 
-    def openScreenshot(self):  # 打开截图窗口
+    def openScreenshot(self):
+        """
+
+        """
+        # 打开截图窗口
         if not OCRe.msnFlag == MsnFlag.none or not self.win.attributes('-disabled') == 0:
             return
         self.win.attributes("-disabled", 1)  # 禁用主窗口
@@ -1256,7 +1447,11 @@ class MainWin:
         else:
             ScreenshotCopy()  # 立即截屏
 
-    def closeScreenshot(self, flag, errMsg=None):  # 关闭截图窗口，返回T表示已复制到剪贴板
+    def closeScreenshot(self, flag, errMsg=None):
+        """
+
+        """
+        # 关闭截图窗口，返回T表示已复制到剪贴板
         self.win.attributes("-disabled", 0)  # 启用父窗口
         if errMsg:
             self.panelOutput(f'截图失败，{errMsg}')
@@ -1266,20 +1461,31 @@ class MainWin:
 
             self.startSingleClipboard()  # 剪贴板识图
 
-    def onCloseWin(self):  # 关闭窗口事件
+    def onCloseWin(self):
+        """
+
+        """
+        # 关闭窗口事件
         if Config.get('isBackground'):
             self.win.withdraw()  # 隐藏窗口
         else:
             self.onClose()  # 直接关闭
 
     def onClose(self):  # 关闭软件
+        """
+
+        """
         OCRe.stop()  # 强制关闭引擎进程，加快子线程结束
         if OCRe.engFlag == EngFlag.none and OCRe.msnFlag == MsnFlag.none:  # 未在运行
             self.exit()
         else:
             self.win.after(50, self.waitClose)  # 等待关闭，50ms轮询一次是否已结束子线程
 
-    def waitClose(self):  # 等待线程关闭后销毁窗口
+    def waitClose(self):
+        """
+
+        """
+        # 等待线程关闭后销毁窗口
         Log.info(f'关闭中，等待 {OCRe.engFlag} | {OCRe.msnFlag}')
         if OCRe.engFlag == EngFlag.none and OCRe.msnFlag == MsnFlag.none:  # 未在运行
             self.exit()
@@ -1287,12 +1493,19 @@ class MainWin:
             self.win.after(50, self.waitClose)  # 等待关闭，50ms轮询一次是否已结束子进程
 
     def exit(self):
+        """
+
+        """
         SysTray.stop()  # 关闭托盘。这个函数里有判断，不会造成无限递归。
         # 等待一段时间，保证托盘线程关闭，图标从系统注销
         # 然后强制终止主进程，防止引擎子线程苟且偷生
         self.win.after(100, lambda: os._exit(0))
 
-    def showTips(self, tipsText):  # 显示提示
+    def showTips(self, tipsText):
+        """
+        
+        """
+        # 显示提示
         if not OCRe.msnFlag == MsnFlag.none:
             tk.messagebox.showwarning(
                 '任务进行中', '请停止任务后，再打开软件说明')
